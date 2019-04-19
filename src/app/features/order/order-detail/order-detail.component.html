@@ -6,7 +6,7 @@
       TimeStamp: {{order.timestamp}}
   </div>
   <div>
-      Total: {{order.total}}
+      Total: {{order.total | currency: 'USD': 'symbol-narrow'}}
   </div>
   <div>
       Customer: {{order.customer}}

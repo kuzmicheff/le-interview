@@ -11,7 +11,7 @@
     </div> -->
       <div class="col-sm">{{order.id}}</div>
       <div class="col-sm">{{order.timestamp}}</div>
-      <div class="col-sm">{{order.total}}</div>
+      <div class="col-sm">{{order.total | currency: 'USD': 'symbol-narrow'}}</div>
       <div class="col-sm">{{order.customer}}</div>
       <div class="col-sm">{{order.items.length}}</div>
   </div>
