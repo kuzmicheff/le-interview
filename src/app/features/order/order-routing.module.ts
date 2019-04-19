@@ -5,7 +5,7 @@ import { OrderComponent } from './order.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 
-const routes: Routes = [
+const orderRoutes: Routes = [
   {
     path: '',
     component: OrderComponent,
@@ -16,7 +16,7 @@ const routes: Routes = [
       },
       {
         path: 'order/:id',
-        component: OrderDetailComponent
+        component: OrderDetailComponent,
       },
       {
         path: '',
@@ -28,7 +28,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes)
+    RouterModule.forChild(orderRoutes)
   ],
   exports: [
     RouterModule
