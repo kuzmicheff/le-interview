@@ -5,7 +5,7 @@
     </div>
   </div>
   <div *ngFor="let order of orders"  class="row" (mouseover)="highlightRow(order)"
-    [ngClass] = "{'highlight' : order.id == id}" (click)="loadDetail(order.id)">
+    [ngClass] = "{'highlight' : order.id == id}" [routerLink]="['order', order.id ]">
  <!--   <div *ngFor="let key of keys" class="col-sm">
       {{order[key]}}
     </div> -->
@@ -16,3 +16,4 @@
       <div class="col-sm">{{order.items.length}}</div>
   </div>
 </div> 
+
