@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { OrderComponent } from './order.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { OrderAddComponent } from './order-add/order-add.component';
 
 const orderRoutes: Routes = [
   {
@@ -11,12 +12,16 @@ const orderRoutes: Routes = [
     component: OrderComponent,
     children: [
       {
-        path: 'order',
+        path: 'list',
         component: OrderListComponent
       },
       {
-        path: 'order/:id',
+        path: 'detail/:id',
         component: OrderDetailComponent,
+      },
+      {
+        path: 'add',
+        component: OrderAddComponent
       },
       {
         path: '',

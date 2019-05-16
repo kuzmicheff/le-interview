@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
 import { OrderService } from 'src/app/services/order.service';
-import { Order} from 'src/app/interfaces/order.interface';
+import { Order } from 'src/app/classes/order.class';
 
 @Component({
   selector: 'app-order-list',
@@ -12,28 +12,31 @@ import { Order} from 'src/app/interfaces/order.interface';
 })
 export class OrderListComponent implements OnInit {
 
-  constructor(private orderService: OrderService,
-              private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+  public orders: Order[];
+  public id: number;
 
-  orders: Order[];
-  columns: String[] = ["ID", "TimeStamp", "Total", "Customer", "Items"];
-  keys: String[] = ["id", "timestamp", "total", "customer", "items"]
+  constructor(
+    private orderService: OrderService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.orderService.getOrderList().subscribe(
-      (orders: Order[]) => this.orders = orders,
-      errors => console.log(errors)
-    );
+    this.orderService.getOrderList()
+      .subscribe(data => {
+        this.orders = data;
+      }, error => {
+        console.error(error);
+      });
   }
 
-  public id:any;
-  
   public highlightRow(order) {
     this.id = order.id;
   }
 
-  public loadDetail(id: any) {
-    this.router.navigate(['order', id], {relativeTo: this.activatedRoute});
+  public navigateToDetail(id: string) {
+    this.router.navigate([ 'detail', id ], {
+      relativeTo: this.route.parent
+    });
   }
 }

@@ -9,7 +9,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'orders',
+    path: 'order',
     loadChildren: './features/order/order.module#OrderModule'
   },
   {

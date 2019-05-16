@@ -2,20 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order} from 'src/app/interfaces/order.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class OrderService {
 
-  private URL: string = "api/orders/";
+  private url: string = "api/orders/";
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) {}
 
   public getOrderList() {
-    return this.httpClient.get<Order[]>(this.URL);
+    return this.http.get<Order[]>(this.url);
   }
 
   public getOrderDetail(id: string) {
-    return this.httpClient.get<Order>(this.URL  + id);
+    return this.http.get<Order>(this.url + id);
   }
 }

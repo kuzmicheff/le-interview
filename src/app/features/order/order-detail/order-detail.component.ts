@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component,
+         OnInit }          from '@angular/core';
+import { Router,
+         ActivatedRoute, } from '@angular/router';
+import { Location }        from '@angular/common';
 
-import { OrderService } from 'src/app/services/order.service';
-import { Order} from 'src/app/classes/order.class';
+import { OrderService }    from 'src/app/services/order.service';
+import { Order}            from 'src/app/classes/order.class';
 
 
 @Component({
@@ -12,17 +15,29 @@ import { Order} from 'src/app/classes/order.class';
 })
 export class OrderDetailComponent implements OnInit {
 
-  constructor(private orderService: OrderService,
-              private route: ActivatedRoute ) { }
+  constructor(
+    private service: OrderService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
-  public order: Order = new Order(null, null, null, null, []);
+  public order: Order;
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.orderService.getOrderDetail(id).subscribe(
-        (order: Order) => this.order = {...order},
-        error => console.log(error) 
+    this.service.getOrderDetail(id)
+      .subscribe(data => {
+        this.order = new Order(data.id, data.timestamp, data.total, data.customer, data.items);
+        console.info(data);
+      }, error => {
+        console.error(error);
+      } 
       );
+  }
+
+  public navigateBack() {
+    this.location.back();
   }
 
 }
